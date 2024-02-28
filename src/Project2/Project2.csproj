@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-Project2-80D423D8-9A3F-4CF1-9267-C22B7AC10354</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MassTransit" Version="8.1.3" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.3" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Messaging\Messaging.csproj" />
+    </ItemGroup>
+</Project>
