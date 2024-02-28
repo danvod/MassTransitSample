@@ -10,10 +10,10 @@ IHost host = Host.CreateDefaultBuilder(args)
                  .ConfigureServices(services =>
                  {
                      services.AddScoped<IIdentityService, IdentityService>();
-                     
+
                      services.AddMassTransit(x =>
                      {
-                         var consumerAssembly = Assembly.GetAssembly(typeof(RoundRobinConsumer));
+                         //var consumerAssembly = Assembly.GetAssembly(typeof(RoundRobinConsumer));
 
                          // Register consumers from a given assembly
                          //x.AddConsumers(consumerAssembly);
@@ -62,7 +62,7 @@ IHost host = Host.CreateDefaultBuilder(args)
                                  e => { e.ConfigureConsumer<NotificationConsumer>(context); });
 
                              cfg.UseConsumeFilter(typeof(SampleConsumeFilter<>), context);
-                             
+
                              // When configuring endpoints manually, ConfigureEndpoints should be excluded or be called after any explicitly configured receive endpoints.
                              cfg.ConfigureEndpoints(context);
                          });

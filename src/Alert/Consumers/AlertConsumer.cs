@@ -15,7 +15,9 @@ public class AlertConsumer :
 
     public Task Consume(ConsumeContext<AlertEvent> context)
     {
-        _logger.LogInformation("Received Alert From: {Text}, Value: {Value}", context.Message.Origin, context.Message.Text);
+        //  Custom header will only be visible from Project2Worker
+        _logger.LogInformation("Received Alert From: {0}, Value: {1}, Custom Header: {2}",
+            context.Message.Origin, context.Message.Text, context.Headers.Get<string>("My-Custom-Header"));
         return Task.CompletedTask;
     }
 }

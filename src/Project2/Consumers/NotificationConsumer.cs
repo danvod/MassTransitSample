@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Messaging.Contracts.Notification;
+using Service;
 
 namespace Project2.Consumers;
 
@@ -20,16 +21,19 @@ public class NotificationConsumerDefinition : ConsumerDefinition<NotificationCon
 public class NotificationConsumer : IConsumer<NotificationEvent>
 {
     readonly ILogger<NotificationEvent> _logger;
+    private readonly IIdentityService _identity;
 
-    public NotificationConsumer(ILogger<NotificationEvent> logger)
+    public NotificationConsumer(ILogger<NotificationEvent> logger, IIdentityService identity)
     {
         _logger = logger;
+        _identity = identity;
     }
 
     public Task Consume(ConsumeContext<NotificationEvent> context)
     {
-        _logger.LogInformation("Handling {0} in Project2, Value: {1}", nameof(NotificationEvent),
-            context.Message.Value);
+        _logger.LogInformation("Handling {0} in Project2, Value: {1}, Token: {2}", nameof(NotificationEvent),
+            context.Message.Value,
+            _identity.Token);
         return Task.CompletedTask;
     }
 }

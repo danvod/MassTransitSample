@@ -15,11 +15,8 @@ public class SampleConsumeFilter<T> :
 
     public Task Send(ConsumeContext<T> context, IPipe<ConsumeContext<T>> next)
     {
-        Console.WriteLine("In Sample Consume filter");
-
         var token = context.Headers.Get<string>("Token");
-
-        Console.WriteLine("Consume Filter - Received token value: {0}", token);
+        
         _identity.SetToken(token);
 
         return next.Send(context);

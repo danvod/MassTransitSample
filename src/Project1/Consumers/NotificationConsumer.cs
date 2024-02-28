@@ -20,9 +20,7 @@ public class NotificationConsumer : IConsumer<NotificationEvent>
     {
         _logger.LogInformation("Handling {0} in Project1, Value: {1}, Token: {2}", nameof(NotificationEvent),
             context.Message.Value,
-            context.Headers.Get<string>("Token"));
-        
-        _logger.LogInformation("{0}, Token Value: {1}", nameof(NotificationEvent), _identity.Token);
+            _identity.Token);
         
         return Task.CompletedTask;
     }

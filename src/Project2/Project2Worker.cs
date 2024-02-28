@@ -19,13 +19,16 @@ public class Project2Worker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            var alert = new AlertEvent()
+            /*
+             * Alternative way to Publish, compared to Project1Worker
+             * This enables passing a custom header
+             */
+            await _bus.Publish<AlertEvent>(new
             {
                 Origin = "Project2",
-                Text = $"{nameof(AlertEvent)} message from Project2 Worker"
-            };
-
-            await _bus.Publish(alert);
+                Text = "AlertEvent message from Project2 Worker",
+                __Header_My_Custom_Header = "just-a-sample"
+            });
             await Task.Delay(5000, stoppingToken);
         }
     }
