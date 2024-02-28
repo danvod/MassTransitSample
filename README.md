@@ -5,7 +5,7 @@ Example solution with some [MassTransit](https://masstransit.io/) examples for R
 ## Pre-Requisites
 
 ```powershell
-docker run --hostname localhost --rm -d -p 15671:15671/tcp -p 15672:15672/tcp -p 25672:25672/tcp -p 4369:4369/tcp -p 5671:5671/tcp -p 5672:5672/tcp rabbitmq:3-management
+docker run --hostname localhost --rm -d -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
 ```
 
 
