@@ -51,10 +51,10 @@ public class Worker : BackgroundService
                     // It is also possible to Send directly to a queue or an exchange
                     var endpoint = await _bus.GetSendEndpoint(new Uri("exchange:direct-a"));
 
-                    await endpoint.Send(new DirectEvent()
+                    await endpoint.Send(new DirectEvent
                     {
                         Value = "Send - Direct event from ConsoleProducer A"
-                    });
+                    }, x => x.SetRoutingKey("A"));
                     
                     break;
                 case "DirectB":
