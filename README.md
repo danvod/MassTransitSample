@@ -47,6 +47,8 @@ Options:
 dotnet run -- {option}
 ```
 
+------
+
 ### Alert
 
 A HostedService project consuming the `AlertEvent`. Minimal, automatic configuration. `AlertConsumer` consumes `AlertEvent,` which is published from both Project1Worker and Project2Worker.
@@ -56,8 +58,14 @@ A HostedService project consuming the `AlertEvent`. Minimal, automatic configura
 Shows
 
 - multiple producers with 1 consumer
+
 - 2 different ways of publishing - `bus.Publish<T>` vs `bus.Publish(new ())`
+
 - passing custom headers
+
+  
+
+------
 
 ### Project1 & Project2
 
@@ -81,6 +89,8 @@ Run ConsoleProducer with `dotnet run -- NotificationEvent` to see
 Run ConsoleProducer with `dotnet run -- RoundRobinEvent` to see
 
 - multiple instances (or different instances), consuming the same message (`RoundRobinEvent`) in a round-robin fashion. Unlike in `NotificationEvent`, dedicated queues are not set up for each service.
+
+------
 
 ### DirectConsumer
 
