@@ -1,5 +1,8 @@
 ﻿namespace Service;
 
+/// <summary>
+/// Simple injectable service to showcase Publish & Consume filters.
+/// </summary>
 public class IdentityService : IIdentityService
 {
     public string Token { get; set; }
@@ -10,10 +13,9 @@ public class IdentityService : IIdentityService
                                          .Select(s => s[new Random().Next(s.Length)]).ToArray());
 
         Console.WriteLine("Set Token value: {0}", token);
-        
+
         return Task.FromResult(token);
     }
-    
 
     public void SetToken(string token)
     {

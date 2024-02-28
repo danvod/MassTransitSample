@@ -58,7 +58,7 @@ public class Worker : BackgroundService
                     
                     break;
                 case "DirectB":
-                    await _bus.Publish(new DirectEvent()
+                    await _bus.Publish(new DirectEvent
                     {
                         Value = "Direct event from ConsoleProducer B"
                     }, x => x.SetRoutingKey("B"));

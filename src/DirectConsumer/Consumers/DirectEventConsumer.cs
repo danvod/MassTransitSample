@@ -1,8 +1,7 @@
 ﻿using MassTransit;
 using Messaging.Contracts.Direct;
-using RabbitMQ.Client;
 
-namespace SendConsumer.Consumers;
+namespace DirectConsumer.Consumers;
 
 public class DirectEventConsumer : IConsumer<DirectEvent>
 {
@@ -15,7 +14,7 @@ public class DirectEventConsumer : IConsumer<DirectEvent>
 
     public Task Consume(ConsumeContext<DirectEvent> context)
     {
-        _logger.LogInformation("Handling message from: {0}, Value: {1}, RoutingKey: {2}", 
+        _logger.LogInformation("Handling message from: {0}, Value: {1}, RoutingKey: {2}",
             nameof(DirectEventConsumer),
             context.Message.Value,
             context.RoutingKey());

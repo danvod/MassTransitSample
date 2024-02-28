@@ -1,6 +1,20 @@
-Example solution with some MassTransit examples.
+Example solution with some [MassTransit](https://masstransit.io/) examples for RabbitMQ
 
 
+
+## Pre-Requisites
+
+```powershell
+docker run --hostname localhost --rm -d -p 15671:15671/tcp -p 15672:15672/tcp -p 25672:25672/tcp -p 4369:4369/tcp -p 5671:5671/tcp -p 5672:5672/tcp rabbitmq:3-management
+```
+
+
+
+To run all consumers
+
+```
+./run_consumers.sh
+```
 
 
 
@@ -11,6 +25,8 @@ Example solution with some MassTransit examples.
 Holds message contracts together with custom Publish and Consume filters.
 
 
+
+Additionally, it shows very basic implementations of `IFilter<ConsumeContext<T>>` and `IFilter<PublishContext<T>>`  which are used by Project1.
 
 ### ConsoleProducer
 
@@ -33,14 +49,14 @@ dotnet run -- {option}
 
 ### Alert
 
-A HostedService project consuming the `AlertEvent`. Minimal, automatic configuration. `AlertConsumer` consumes `AlertEvent` which is published from both Project1 and Project2.
+A HostedService project consuming the `AlertEvent`. Minimal, automatic configuration. `AlertConsumer` consumes `AlertEvent,` which is published from both Project1Worker and Project2Worker.
 
 
 
 Shows
 
 - multiple producers with 1 consumer
-- 2 different ways of publishing
+- 2 different ways of publishing - `bus.Publish<T>` vs `bus.Publish(new ())`
 - passing custom headers
 
 ### Project1 & Project2
@@ -49,25 +65,28 @@ Both consume `NotificationEvent` and `RoundRobinEvent`
 
 
 
-Project1 has ReceiveEndpoint configured in the startup.
+Project1 has a ReceiveEndpoint configured in the startup.
 
-Project2 shows an alternative way of configuring a receive endpoint with `NotificationConsumerDefinition`
+Project2 shows an alternative way of configuring a receive endpoint with a  `NotificationConsumerDefinition`
 
 
 
-When ConsoleProducer is ran with `dotnet run -- NotificationEvent`, 
+Run ConsoleProducer with `dotnet run -- NotificationEvent` to see
 
 - PubSub example - a message `NotificationEvent` handled by `NotificationConsumer` in Project1 & Project2
 - Publish & Consume filters - Project1 has Publish & Consume filters configured, meaning we can pass arbitrary values in the headers. The way it's configured, it will apply to all producers and consumers.
 
 
 
-When ConsoleProducer is ran with `dotnet run -- RoundRobinEvent`
+Run ConsoleProducer with `dotnet run -- RoundRobinEvent` to see
 
-- multiple instances (or different instances), consuming the same message RoundRobinEvent in a round-robin fashion. Unlike in `NotificationEvent`, dedicated queues are not set up for each service.
+- multiple instances (or different instances), consuming the same message (`RoundRobinEvent`) in a round-robin fashion. Unlike in `NotificationEvent`, dedicated queues are not set up for each service.
 
-### SendConsumer
+### DirectConsumer
 
-Consums `DirectEvent`
+Consumes `DirectEvent`. This project shows
+
+- direct exchange configuration
+- examples of `Send` or `Publish` for a direct message
 
 ### 

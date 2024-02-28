@@ -1,9 +1,9 @@
 using System.Reflection;
+using DirectConsumer;
 using MassTransit;
 using Messaging.Contracts.Direct;
 using RabbitMQ.Client;
-using SendConsumer;
-using SendConsumer.Consumers;
+using DirectConsumer.Consumers;
 
 IHost host = Host.CreateDefaultBuilder(args)
                  .ConfigureServices(services =>

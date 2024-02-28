@@ -1,4 +1,4 @@
-namespace SendConsumer;
+namespace DirectConsumer;
 
 public class Worker : BackgroundService
 {

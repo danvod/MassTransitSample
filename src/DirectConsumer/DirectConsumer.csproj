@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>dotnet-SendConsumer-94984F8F-92E4-4A76-A8B2-582E5FB6D48B</UserSecretsId>
+        <RootNamespace>DirectConsumer</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
