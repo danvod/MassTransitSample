@@ -5,9 +5,9 @@ namespace Project2.Consumers;
 
 public class RoundRobinConsumer : IConsumer<RoundRobinEvent>
 {
-    readonly ILogger<RoundRobinEvent> _logger;
+    readonly ILogger<RoundRobinConsumer> _logger;
 
-    public RoundRobinConsumer(ILogger<RoundRobinEvent> logger)
+    public RoundRobinConsumer(ILogger<RoundRobinConsumer> logger)
     {
         _logger = logger;
     }

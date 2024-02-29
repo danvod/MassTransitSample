@@ -20,10 +20,10 @@ public class NotificationConsumerDefinition : ConsumerDefinition<NotificationCon
 
 public class NotificationConsumer : IConsumer<NotificationEvent>
 {
-    readonly ILogger<NotificationEvent> _logger;
+    readonly ILogger<NotificationConsumer> _logger;
     private readonly IIdentityService _identity;
 
-    public NotificationConsumer(ILogger<NotificationEvent> logger, IIdentityService identity)
+    public NotificationConsumer(ILogger<NotificationConsumer> logger, IIdentityService identity)
     {
         _logger = logger;
         _identity = identity;

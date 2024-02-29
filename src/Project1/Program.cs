@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Security.Principal;
 using MassTransit;
+using Messaging.Contracts.KillSwitch;
 using Messaging.Filters;
 using Project1;
 using Project1.Consumers;
@@ -35,6 +36,7 @@ IHost host = Host.CreateDefaultBuilder(args)
                           */
                          x.AddConsumer<RoundRobinConsumer>();
                          x.AddConsumer<NotificationConsumer>();
+                         x.AddConsumer<KillSwitchConsumer, KillSwitchConsumerDefinition>();
 
                          // Note - Consumers are added before adding the transport
                          x.UsingRabbitMq((context, cfg) =>
@@ -60,6 +62,8 @@ IHost host = Host.CreateDefaultBuilder(args)
                               */
                              cfg.ReceiveEndpoint("notification-p1",
                                  e => { e.ConfigureConsumer<NotificationConsumer>(context); });
+
+                             cfg.ReceiveEndpoint();
 
                              cfg.UseConsumeFilter(typeof(SampleConsumeFilter<>), context);
 

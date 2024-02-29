@@ -1,5 +1,7 @@
 using MassTransit;
+using MassTransit.Transports.Components;
 using Messaging.Contracts.Direct;
+using Messaging.Contracts.KillSwitch;
 using Messaging.Contracts.Notification;
 
 namespace ConsoleProducer;
@@ -22,6 +24,7 @@ public class Worker : BackgroundService
 
         _logger.LogInformation("Running Example {0}", sampleToRun);
 
+        var counter = 0;
         while (!stoppingToken.IsCancellationRequested)
         {
             var g = Guid.NewGuid();
@@ -62,6 +65,13 @@ public class Worker : BackgroundService
                     {
                         Value = "Direct event from ConsoleProducer B"
                     }, x => x.SetRoutingKey("B"));
+                    break;
+                case "KillSwitch":
+                    counter++;
+                    await _bus.Publish(new KillSwitchEvent()
+                    {
+                        Value = counter
+                    });
                     break;
             }
 
